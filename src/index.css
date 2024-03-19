@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  /* main */
+  .main-container {
+    @apply flex min-h-screen flex-1 flex-col items-center px-6 pb-10 pt-28 max-md:pb-32 sm:px-10 bg-dash;
+  }
+  .topbar {
+    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-[#150B62] px-6 py-3 shadow-sm;
+  }
+  .pagination {
+    @apply mt-10 flex w-full items-center justify-center gap-5;
+  }
+
+  .flexCenter {
+    @apply flex justify-center items-center;
+  }
+}
+
+
+.account-form_input {
+  @apply border border-[#43a5f6] bg-white text-gray-700 !important;
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
