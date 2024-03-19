@@ -1,25 +1,42 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import UsersTable from '@/components/shared/UsersTable';
 const ViewUsers = () =>{
-	const [users, setUsers] = useState([]);
-	const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const fetchUsers = async () => {
-        try {
-            const response = await axios.get('http://localhost:3000/api/users');
-            console.log(response.data)
-            // setUsers(response.data.users);
-            setLoading(false);
-        } catch (error) {
-            setError('Error fetching users');
-            setLoading(false);
-        }
-    };
+  const [users, setUsers] = useState([]);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetchUsers();
-    }, []);
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/users", {
+        params: { page: currentPage, from: fromDate, to: toDate }
+      });
+      const { users, totalUsers, totalPages } = response.data;
+      setUsers(users);
+      setTotalUsers(totalUsers);
+      setTotalPages(totalPages);
+      setLoading(false);
+    } catch (error) {
+      setError("Error fetching users");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [currentPage, fromDate, toDate]);
+
+   const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
     if (loading) {
         return <div className="main-container flexCenter">
         <div className="text-right">
@@ -54,13 +71,25 @@ const ViewUsers = () =>{
  return (
  	<>
  		<div className="main-container">
- 			<div className="w-full max-w-xl glassmorphism rounded-[18px] p-5">
+ 			<div className="w-fit glassmorphism rounded-[18px] p-5">
  				<div>
  				 <h3 className="text-heading1-semibold text-[#150B62] uppercase mb-3 text-center">Users Available</h3>
  				  <div>
  				   {
- 				   	users?.length <= 0 ? <p className="text-center">There is no user available. <Link to="/" className="underline text-primary-500">Create User</Link></p> :
- 				    <></>
+ 				   	users?.length > 0 ? <p className="text-center">There is no user available. <Link to="/" className="underline text-primary-500">Create User</Link></p> :
+ 				     <>
+                        <UsersTable 
+                          users={users}
+                          totalUsers={totalUsers}
+                          currentPage={currentPage}
+                          totalPages={totalPages}
+                          fromDate={fromDate}
+                          setFromDate={setFromDate}
+                          toDate={toDate}
+                          setToDate={setToDate}
+                          handlePageChange={handlePageChange}
+                         />           
+                    </>
  					}
  				  </div> 
  				</div>
