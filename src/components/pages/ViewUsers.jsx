@@ -27,7 +27,7 @@ const ViewUsers = () =>{
       setLoading(false);
     }
   };
-
+console.log(users);
   useEffect(() => {
     fetchUsers();
   }, [currentPage, fromDate, toDate]);
@@ -76,8 +76,8 @@ const ViewUsers = () =>{
  				 <h3 className="text-heading1-semibold text-[#150B62] uppercase mb-3 text-center">Users Available</h3>
  				  <div>
  				   {
- 				   	users?.length > 0 ? <p className="text-center">There is no user available. <Link to="/" className="underline text-primary-500">Create User</Link></p> :
- 				     <>
+ 				   	users?.length <= 0 ? <p className="text-center">There is no user available. <Link to="/" className="underline text-primary-500">Create User</Link></p> :
+ 				     <div className="lg:max-w-fit max-w-md">
                         <UsersTable 
                           users={users}
                           totalUsers={totalUsers}
@@ -89,7 +89,7 @@ const ViewUsers = () =>{
                           setToDate={setToDate}
                           handlePageChange={handlePageChange}
                          />           
-                    </>
+                    </div>
  					}
  				  </div> 
  				</div>

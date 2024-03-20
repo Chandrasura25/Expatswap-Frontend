@@ -19,7 +19,7 @@ const UsersTable = ({
                 <input type="date" value={toDate} onChange={e => setToDate(e.target.value)} />
             </div>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-white uppercase">
                     <tr>
                         <th scope="col" className="px-6 py-3">
                             S/N
@@ -43,11 +43,11 @@ const UsersTable = ({
                 </thead>
                  <tbody>
                     {users.map((user, index)=>(
-                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                     <tr key={index} className="border-b text-white">
                         <td className="px-6 py-4">
                         {index + 1}
                         </td>
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">
                            {user.firstname}
                         </th>
                         <td className="px-6 py-4">
@@ -67,7 +67,7 @@ const UsersTable = ({
                 </tbody>
             </table>
             <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span className="font-semibold text-gray-900 dark:text-white">{currentPage}</span> of <span className="font-semibold text-gray-900 dark:text-white">{totalPages}</span></span>
+                <span className="text-sm font-normal text-white dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span className="font-semibold text-blue1 dark:text-white">{currentPage}</span> of <span className="font-semibold text-gray-500 dark:text-white">{totalPages}</span></span>
                 <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
                     <li>
                         <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</a>
